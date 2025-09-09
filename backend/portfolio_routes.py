@@ -4,6 +4,12 @@ from models import PersonalInfo, Services, Project, Pricing, Testimonial, Contac
 from typing import List
 import os
 from datetime import datetime
+from dotenv import load_dotenv
+from pathlib import Path
+
+# Load environment variables
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
 
 # Get database connection
 mongo_url = os.environ['MONGO_URL']
