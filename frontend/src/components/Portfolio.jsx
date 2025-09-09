@@ -135,7 +135,7 @@ const Portfolio = () => {
               {portfolioData.services.headline}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Je combine l'efficacité de l'intelligence artificielle avec une approche personnalisée 
+              Je combine l'efficacité des outils informatiques modernes avec une approche personnalisée 
               pour créer des sites web qui convertissent vraiment vos visiteurs en clients.
             </p>
           </div>
