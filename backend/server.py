@@ -10,6 +10,8 @@ from typing import List
 import uuid
 from datetime import datetime
 
+# Import portfolio routes
+from portfolio_routes import portfolio_router, contact_router
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -20,13 +22,12 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(title="Portfolio Marvin Lacroix API", version="1.0.0")
 
-# Create a router with the /api prefix
+# Create a router with the /api prefix for legacy routes
 api_router = APIRouter(prefix="/api")
 
-
-# Define Models
+# Define Models for legacy routes
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
@@ -35,10 +36,10 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+# Legacy routes
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Portfolio Marvin Lacroix API - Ready!"}
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
@@ -52,13 +53,16 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-# Include the router in the main app
+# Include all routers
 app.include_router(api_router)
+app.include_router(portfolio_router)
+app.include_router(contact_router)
 
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -70,6 +74,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+@app.on_event("startup")
+async def startup_event():
+    logger.info("🚀 Portfolio API started successfully!")
+    logger.info("📁 Available endpoints:")
+    logger.info("   GET /api/portfolio/personal")
+    logger.info("   GET /api/portfolio/services")
+    logger.info("   GET /api/portfolio/projects")
+    logger.info("   GET /api/portfolio/pricing")
+    logger.info("   GET /api/portfolio/testimonials")
+    logger.info("   POST /api/contact")
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+    logger.info("🔌 Database connection closed")
