@@ -170,7 +170,7 @@ export const portfolioData = {
     {
       name: "Sophie Martin",
       business: "Restaurant Le Petit Gourmand",
-      text: "Marvin a transformé notre visibilité en ligne ! Le site est magnifique et nos réservations ont augmenté de 50% en 2 mois.",
+      text: "Marvin a transformé notre visibilité en ligne ! Le site est magnifique et nos réservations ont augmenté de 50% en 2 mois grâce à ses outils informatiques performants.",
       rating: 5,
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
     },
