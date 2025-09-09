@@ -4,8 +4,8 @@ export const portfolioData = {
     name: "Marvin Lacroix",
     title: "Développeur Web & Expert en Outils Informatiques",
     location: "Embrun, France",
-    email: "marvin.lacroix@example.com", 
-    phone: "+33 6 12 34 56 78",
+    email: "marvin.ceateurweb@gmail.com", 
+    phone: "07 70 06 10 75",
     tagline: "Créateur de sites web modernes avec les outils informatiques avancés",
     description: "Spécialisé dans la création de sites web pour entreprises locales en combinant l'efficacité des outils informatiques modernes avec une personnalisation humaine sur mesure."
   },
