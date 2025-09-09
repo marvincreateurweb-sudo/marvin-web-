@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the portfolio backend API endpoints to ensure they work correctly"
+user_problem_statement: "Test complet du portfolio frontend de Marvin Lacroix - Freelance création de sites web"
 
 backend:
   - task: "GET /api/ endpoint"
