@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -17,12 +17,67 @@ import {
   Search,
   Smartphone,
   Check,
-  ArrowRight
+  ArrowRight,
+  Loader2
 } from 'lucide-react';
-import portfolioData from '../data/mock';
+import { portfolioAPI } from '../services/api';
+import portfolioDataMock from '../data/mock'; // Fallback data
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [portfolioData, setPortfolioData] = useState({
+    personal: null,
+    services: null,
+    projects: [],
+    pricing: null,
+    testimonials: []
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Load portfolio data from API
+  useEffect(() => {
+    const loadPortfolioData = async () => {
+      try {
+        setLoading(true);
+        
+        // Fetch all data in parallel
+        const [personal, services, projects, pricing, testimonials] = await Promise.all([
+          portfolioAPI.getPersonalInfo(),
+          portfolioAPI.getServices(),
+          portfolioAPI.getProjects(),
+          portfolioAPI.getPricing(),
+          portfolioAPI.getTestimonials()
+        ]);
+
+        setPortfolioData({
+          personal,
+          services,
+          projects,
+          pricing,
+          testimonials
+        });
+        
+        setError(null);
+      } catch (err) {
+        console.error('Error loading portfolio data:', err);
+        setError(err.message);
+        
+        // Fallback to mock data if API fails
+        setPortfolioData({
+          personal: portfolioDataMock.personal,
+          services: portfolioDataMock.services,
+          projects: portfolioDataMock.projects,
+          pricing: portfolioDataMock.pricing,
+          testimonials: portfolioDataMock.testimonials
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPortfolioData();
+  }, []);
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -36,13 +91,32 @@ const Portfolio = () => {
     Smartphone: Smartphone
   };
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-blue-600" />
+          <p className="text-gray-600">Chargement du portfolio...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state with fallback
+  if (error) {
+    console.warn('API Error, using fallback data:', error);
+  }
+
+  const { personal, services, projects, pricing, testimonials } = portfolioData;
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="font-bold text-xl text-gray-900">
-            {portfolioData.personal.name}
+            {personal?.name || 'Marvin Lacroix'}
           </div>
           
           <nav className="hidden md:flex space-x-8">
@@ -101,10 +175,10 @@ const Portfolio = () => {
       <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-light text-gray-900 mb-6 leading-tight">
-            {portfolioData.personal.tagline}
+            {personal?.tagline || 'Créateur de sites web modernes avec les outils informatiques avancés'}
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            {portfolioData.personal.description}
+            {personal?.description || 'Spécialisé dans la création de sites web pour entreprises locales...'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -132,7 +206,7 @@ const Portfolio = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-light text-gray-900 mb-6">
-              {portfolioData.services.headline}
+              {services?.headline || 'Ma méthode unique : Outils informatiques + Personnalisation humaine'}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Je combine l'efficacité des outils informatiques modernes avec une approche personnalisée 
@@ -141,7 +215,7 @@ const Portfolio = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {portfolioData.services.benefits.map((benefit, index) => {
+            {(services?.benefits || []).map((benefit, index) => {
               const IconComponent = iconMap[benefit.icon];
               return (
                 <Card key={index} className="border border-gray-200 hover:shadow-lg transition-shadow duration-300">
@@ -179,7 +253,7 @@ const Portfolio = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {portfolioData.projects.map((project) => (
+            {projects.map((project) => (
               <Card key={project.id} className="overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="aspect-video overflow-hidden">
                   <img 
@@ -246,7 +320,7 @@ const Portfolio = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {portfolioData.pricing.packages.map((pkg, index) => (
+            {(pricing?.packages || []).map((pkg, index) => (
               <Card 
                 key={index} 
                 className={`relative border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
@@ -314,7 +388,7 @@ const Portfolio = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {portfolioData.testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
               <Card key={index} className="border border-gray-200">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-1 mb-4">
@@ -363,7 +437,7 @@ const Portfolio = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Téléphone</p>
-                  <p className="text-gray-600">{portfolioData.personal.phone}</p>
+                  <p className="text-gray-600">{personal?.phone || '07 70 06 10 75'}</p>
                 </div>
               </div>
               
@@ -373,7 +447,7 @@ const Portfolio = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Email</p>
-                  <p className="text-gray-600">{portfolioData.personal.email}</p>
+                  <p className="text-gray-600">{personal?.email || 'marvin.ceateurweb@gmail.com'}</p>
                 </div>
               </div>
               
@@ -383,7 +457,7 @@ const Portfolio = () => {
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Localisation</p>
-                  <p className="text-gray-600">{portfolioData.personal.location}</p>
+                  <p className="text-gray-600">{personal?.location || 'Embrun, France'}</p>
                 </div>
               </div>
             </div>
@@ -393,7 +467,7 @@ const Portfolio = () => {
             <Button 
               size="lg" 
               className="bg-blue-600 hover:bg-blue-700 text-white px-8"
-              onClick={() => window.location.href = `mailto:${portfolioData.personal.email}`}
+              onClick={() => window.location.href = `mailto:${personal?.email || 'marvin.ceateurweb@gmail.com'}`}
             >
               Demander un devis gratuit
               <Mail className="ml-2 h-5 w-5" />
@@ -402,7 +476,7 @@ const Portfolio = () => {
               variant="outline" 
               size="lg"
               className="border-2 hover:bg-gray-50 px-8"
-              onClick={() => window.location.href = `tel:${portfolioData.personal.phone}`}
+              onClick={() => window.location.href = `tel:${personal?.phone || '0770061075'}`}
             >
               Appeler maintenant
               <Phone className="ml-2 h-5 w-5" />
@@ -415,17 +489,24 @@ const Portfolio = () => {
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-lg font-medium mb-4">
-            {portfolioData.personal.name}
+            {personal?.name || 'Marvin Lacroix'}
           </p>
           <p className="text-gray-400 mb-6">
-            {portfolioData.personal.title} • {portfolioData.personal.location}
+            {personal?.title || 'Développeur Web & Expert en Outils Informatiques'} • {personal?.location || 'Embrun, France'}
           </p>
           <Separator className="bg-gray-700 mb-6" />
           <p className="text-sm text-gray-400">
-            © 2025 {portfolioData.personal.name}. Tous droits réservés.
+            © 2025 {personal?.name || 'Marvin Lacroix'}. Tous droits réservés.
           </p>
         </div>
       </footer>
+      
+      {/* API Status Indicator (only in dev) */}
+      {error && process.env.NODE_ENV === 'development' && (
+        <div className="fixed bottom-4 right-4 bg-yellow-100 border border-yellow-400 text-yellow-800 px-3 py-2 rounded-lg text-sm">
+          ⚠️ Utilisation des données de fallback
+        </div>
+      )}
     </div>
   );
 };
