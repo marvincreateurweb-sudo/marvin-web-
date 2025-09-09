@@ -11,12 +11,12 @@ export const portfolioData = {
   },
 
   services: {
-    headline: "Ma méthode unique : IA + Personnalisation humaine",
+    headline: "Ma méthode unique : Outils informatiques + Personnalisation humaine",
     benefits: [
       {
         icon: "Zap",
         title: "Rapidité exceptionnelle",
-        description: "Développement accéléré grâce à l'IA, livraison en 5-10 jours"
+        description: "Développement accéléré grâce aux outils informatiques modernes, livraison en 5-10 jours"
       },
       {
         icon: "Palette",
