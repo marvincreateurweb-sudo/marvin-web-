@@ -20,8 +20,7 @@ import {
   ArrowRight,
   Loader2
 } from 'lucide-react';
-import { portfolioAPI } from '../services/api';
-import portfolioDataMock from '../data/mock'; // Fallback data
+import portfolioDataMock from '../data/mock'; // Données du portfolio
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
