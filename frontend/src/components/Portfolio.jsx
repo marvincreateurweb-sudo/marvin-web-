@@ -75,9 +75,9 @@ const Portfolio = () => {
     );
   }
 
-  // Error state with fallback
+  // Error state (simplified)
   if (error) {
-    console.warn('API Error, using fallback data:', error);
+    console.warn('Using local data');
   }
 
   const { personal, services, projects, pricing, testimonials } = portfolioData;
