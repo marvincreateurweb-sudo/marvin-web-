@@ -1,0 +1,13 @@
+{
+  "name": "marvin-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio de Marvin Lacroix - Créateur de sites web modernes",
+  "scripts": {
+    "build": "cd frontend && yarn install && yarn build",
+    "start": "cd backend && python render_start.py && uvicorn server:app --host 0.0.0.0 --port $PORT",
+    "dev": "echo 'Use yarn dev in frontend/ and python server.py in backend/ for development'"
+  },
+  "keywords": ["portfolio", "react", "fastapi", "freelance"],
+  "author": "Marvin Lacroix",
+  "license": "MIT"
+}

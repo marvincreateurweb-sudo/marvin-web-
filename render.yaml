@@ -1,0 +1,25 @@
+# Render Blueprint pour le déploiement du portfolio
+services:
+  # Backend FastAPI
+  - type: web
+    name: marvin-portfolio-backend
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "cd backend && uvicorn server:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DB_NAME
+        value: portfolio_db
+        # MONGO_URL sera ajouté manuellement via l'interface Render
+    
+  # Frontend React
+  - type: web
+    name: marvin-portfolio-frontend
+    env: node
+    buildCommand: "cd frontend && yarn install && yarn build"
+    startCommand: "cd frontend && npx serve -s build -l $PORT"
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: marvin-portfolio-backend
+          property: host
