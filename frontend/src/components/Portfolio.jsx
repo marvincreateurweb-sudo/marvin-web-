@@ -35,48 +35,21 @@ const Portfolio = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load portfolio data from API
+  // Load portfolio data from mock (simple version)
   useEffect(() => {
-    const loadPortfolioData = async () => {
-      try {
-        setLoading(true);
-        
-        // Fetch all data in parallel
-        const [personal, services, projects, pricing, testimonials] = await Promise.all([
-          portfolioAPI.getPersonalInfo(),
-          portfolioAPI.getServices(),
-          portfolioAPI.getProjects(),
-          portfolioAPI.getPricing(),
-          portfolioAPI.getTestimonials()
-        ]);
-
-        setPortfolioData({
-          personal,
-          services,
-          projects,
-          pricing,
-          testimonials
-        });
-        
-        setError(null);
-      } catch (err) {
-        console.error('Error loading portfolio data:', err);
-        setError(err.message);
-        
-        // Fallback to mock data if API fails
-        setPortfolioData({
-          personal: portfolioDataMock.personal,
-          services: portfolioDataMock.services,
-          projects: portfolioDataMock.projects,
-          pricing: portfolioDataMock.pricing,
-          testimonials: portfolioDataMock.testimonials
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPortfolioData();
+    // Simulate loading for smooth UX
+    setLoading(true);
+    
+    setTimeout(() => {
+      setPortfolioData({
+        personal: portfolioDataMock.personal,
+        services: portfolioDataMock.services,
+        projects: portfolioDataMock.projects,
+        pricing: portfolioDataMock.pricing,
+        testimonials: portfolioDataMock.testimonials
+      });
+      setLoading(false);
+    }, 1000);
   }, []);
 
   const scrollToSection = (sectionId) => {
