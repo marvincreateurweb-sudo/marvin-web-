@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio de Marvin Lacroix - Créateur de sites web modernes avec les outils informatiques avancés - Embrun">
+    <title>Marvin Lacroix - Créateur de sites web | Embrun</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 50%, #faf5ff 100%); }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script>
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        
+        // Données du portfolio
+        const portfolioData = {
+            personal: {
+                name: "Marvin Lacroix",
+                title: "Développeur Web & Expert en Outils Informatiques",
+                location: "Embrun, France",
+                email: "marvin.createurweb@gmail.com",
+                phone: "07 70 06 10 75",
+                tagline: "Créateur de sites web modernes avec les outils informatiques avancés",
+                description: "Spécialisé dans la création de sites web pour entreprises locales en combinant l'efficacité des outils informatiques modernes avec une personnalisation humaine sur mesure."
+            },
+            services: {
+                headline: "Ma méthode unique : Outils informatiques + Personnalisation humaine",
+                benefits: [
+                    {
+                        icon: "Zap",
+                        title: "Rapidité exceptionnelle",
+                        description: "Développement accéléré grâce aux outils informatiques modernes, livraison en 5-10 jours"
+                    },
+                    {
+                        icon: "Palette",
+                        title: "Design moderne",
+                        description: "Interfaces élégantes et responsives adaptées à votre secteur"
+                    },
+                    {
+                        icon: "Search",
+                        title: "SEO local optimisé",
+                        description: "Référencement local pour attirer vos clients de proximité"
+                    },
+                    {
+                        icon: "Smartphone",
+                        title: "Mobile-first",
+                        description: "Sites parfaitement adaptés aux smartphones et tablettes"
+                    }
+                ]
+            },
+            projects: [
+                {
+                    id: 1,
+                    name: "Le Bistro des Alpes",
+                    type: "Restaurant bistronomique",
+                    description: "Site vitrine élégant avec système de réservation en ligne pour ce restaurant gastronomique d'Embrun.",
+                    features: ["Galerie photos des plats", "Réservation en ligne", "Menu interactif", "Avis clients", "Géolocalisation"],
+                    image: "https://images.unsplash.com/photo-1481487196290-c152efe083f5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHx3ZWJzaXRlJTIwbW9ja3VwfGVufDB8fHx8MTc1NzQ2MDQzNnww&ixlib=rb-4.1.0&q=85",
+                    results: "+45% de réservations, +60% de visibilité locale"
+                },
+                {
+                    id: 2,
+                    name: "Brasserie du Centre",
+                    type: "Bar & Brasserie",
+                    description: "Plateforme dynamique pour promouvoir les événements, le plat du jour et l'ambiance conviviale de cette brasserie emblématique.",
+                    features: ["Plat du jour automatisé", "Calendrier événements", "Carte des boissons", "Réservation groupes", "Newsletter"],
+                    image: "https://images.unsplash.com/photo-1519222970733-f546218fa6d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwyfHx3ZWJzaXRlJTIwbW9ja3VwfGVufDB8fHx8MTc1NzQ2MDQzNnww&ixlib=rb-4.1.0&q=85",
+                    results: "+30% de participation aux événements"
+                },
+                {
+                    id: 3,
+                    name: "Saveurs & Événements",
+                    type: "Traiteur événementiel",
+                    description: "Solution complète avec catalogue interactif et système de devis automatisé.",
+                    features: ["Catalogue produits", "Devis en ligne", "Galerie événements", "Formulaire contact", "Témoignages clients"],
+                    image: "https://images.unsplash.com/photo-1659354217586-c5931b31e4c6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHxjYXRlcmluZyUyMHdlYnNpdGV8ZW58MHx8fHwxNzU3NDYwNDQxfDA&ixlib=rb-4.1.0&q=85",
+                    results: "+50% de demandes de devis qualifiées"
+                },
+                {
+                    id: 4,
+                    name: "Artisan Bois Alpin",
+                    type: "Menuiserie artisanale",
+                    description: "Showcase professionnel mettant en valeur le savoir-faire artisanal avec galerie avant/après.",
+                    features: ["Portfolio avant/après", "Devis express", "Savoir-faire détaillé", "Zone d'intervention", "Certifications"],
+                    image: "https://images.unsplash.com/photo-1660796334938-cf0b03be7e6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxjcmFmdHNtYW4lMjBidXNpbmVzc3xlbnwwfHx8fDE3NTc0NjA0NDd8MA&ixlib=rb-4.1.0&q=85",
+                    results: "+70% de demandes de devis, +35% de chiffre d'affaires"
+                }
+            ],
+            pricing: [
+                {
+                    name: "Starter",
+                    price: "890",
+                    description: "Parfait pour démarrer votre présence en ligne",
+                    features: ["Site vitrine 5 pages", "Design responsive", "Optimisation SEO de base", "Formulaire de contact", "1 mois de support", "Hébergement 1 an inclus"],
+                    popular: false
+                },
+                {
+                    name: "Business",
+                    price: "2490",
+                    description: "Solution complète pour développer votre activité",
+                    features: ["Site jusqu'à 15 pages", "Système de réservation/devis", "Galerie photos avancée", "SEO local optimisé", "Analytics & suivi", "3 mois de support", "Formation incluse", "Hébergement 1 an inclus"],
+                    popular: true
+                },
+                {
+                    name: "Premium",
+                    price: "4990",
+                    description: "Plateforme sur mesure avec fonctionnalités avancées",
+                    features: ["Site illimité + blog", "E-commerce intégré", "Système de gestion client", "Multi-langues", "Intégrations API", "SEO avancé + suivi", "6 mois de support", "Formation approfondie", "Hébergement 2 ans inclus"],
+                    popular: false
+                }
+            ],
+            testimonials: [
+                {
+                    name: "Sophie Martin",
+                    business: "Restaurant Le Petit Gourmand",
+                    text: "Marvin a transformé notre visibilité en ligne ! Le site est magnifique et nos réservations ont augmenté de 50% en 2 mois grâce à ses outils informatiques performants.",
+                    rating: 5
+                },
+                {
+                    name: "Pierre Dubois",
+                    business: "Artisan Bois & Fer",
+                    text: "Un travail professionnel et rapide. Le système de devis en ligne nous fait gagner un temps précieux !",
+                    rating: 5
+                },
+                {
+                    name: "Marie Rousseau",
+                    business: "Traiteur Alpes Saveurs",
+                    text: "Exactement ce dont nous avions besoin. Site élégant, facile à utiliser et qui nous apporte de nouveaux clients régulièrement.",
+                    rating: 5
+                }
+            ]
+        };
+
+        function Portfolio() {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => {
+                setTimeout(() => setLoading(false), 1000);
+            }, []);
+
+            const scrollToSection = (sectionId) => {
+                document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+                setIsMenuOpen(false);
+            };
+
+            if (loading) {
+                return React.createElement('div', 
+                    { className: "min-h-screen bg-white flex items-center justify-center" },
+                    React.createElement('div', { className: "text-center" },
+                        React.createElement('div', { className: "animate-spin h-8 w-8 border-2 border-blue-600 border-t-transparent rounded-full mx-auto mb-4" }),
+                        React.createElement('p', { className: "text-gray-600" }, "Chargement du portfolio...")
+                    )
+                );
+            }
+
+            return React.createElement('div', { className: "min-h-screen bg-white" },
+                // Header
+                React.createElement('header', { className: "fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6 py-4 flex justify-between items-center" },
+                        React.createElement('div', { className: "font-bold text-xl text-gray-900" }, portfolioData.personal.name),
+                        React.createElement('nav', { className: "hidden md:flex space-x-8" },
+                            React.createElement('button', { onClick: () => scrollToSection('about'), className: "text-gray-600 hover:text-blue-600 transition-colors" }, "À propos"),
+                            React.createElement('button', { onClick: () => scrollToSection('portfolio'), className: "text-gray-600 hover:text-blue-600 transition-colors" }, "Projets"),
+                            React.createElement('button', { onClick: () => scrollToSection('pricing'), className: "text-gray-600 hover:text-blue-600 transition-colors" }, "Tarifs"),
+                            React.createElement('button', { onClick: () => scrollToSection('contact'), className: "text-gray-600 hover:text-blue-600 transition-colors" }, "Contact")
+                        ),
+                        React.createElement('button', {
+                            className: "md:hidden p-2",
+                            onClick: () => setIsMenuOpen(!isMenuOpen)
+                        }, isMenuOpen ? "✕" : "☰")
+                    ),
+                    isMenuOpen && React.createElement('div', { className: "md:hidden bg-white border-t border-gray-100 py-4" },
+                        React.createElement('nav', { className: "flex flex-col space-y-2 px-6" },
+                            React.createElement('button', { onClick: () => scrollToSection('about'), className: "text-left py-2 text-gray-600 hover:text-blue-600" }, "À propos"),
+                            React.createElement('button', { onClick: () => scrollToSection('portfolio'), className: "text-left py-2 text-gray-600 hover:text-blue-600" }, "Projets"),
+                            React.createElement('button', { onClick: () => scrollToSection('pricing'), className: "text-left py-2 text-gray-600 hover:text-blue-600" }, "Tarifs"),
+                            React.createElement('button', { onClick: () => scrollToSection('contact'), className: "text-left py-2 text-gray-600 hover:text-blue-600" }, "Contact")
+                        )
+                    )
+                ),
+
+                // Hero Section
+                React.createElement('section', { className: "pt-24 pb-16 gradient-bg" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6 text-center" },
+                        React.createElement('h1', { className: "text-4xl md:text-6xl font-light text-gray-900 mb-6 leading-tight" }, portfolioData.personal.tagline),
+                        React.createElement('p', { className: "text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed" }, portfolioData.personal.description),
+                        React.createElement('div', { className: "flex flex-col sm:flex-row gap-4 justify-center" },
+                            React.createElement('button', {
+                                className: "bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors",
+                                onClick: () => scrollToSection('portfolio')
+                            }, "Voir mes projets →"),
+                            React.createElement('button', {
+                                className: "border-2 border-gray-300 hover:bg-gray-50 px-8 py-3 rounded-lg text-lg font-medium transition-colors",
+                                onClick: () => scrollToSection('contact')
+                            }, "Me contacter")
+                        )
+                    )
+                ),
+
+                // About Section
+                React.createElement('section', { id: 'about', className: "py-24 bg-white" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6" },
+                        React.createElement('div', { className: "text-center mb-16" },
+                            React.createElement('h2', { className: "text-3xl md:text-4xl font-light text-gray-900 mb-6" }, portfolioData.services.headline),
+                            React.createElement('p', { className: "text-lg text-gray-600 max-w-3xl mx-auto" }, "Je combine l'efficacité des outils informatiques modernes avec une approche personnalisée pour créer des sites web qui convertissent vraiment vos visiteurs en clients.")
+                        ),
+                        React.createElement('div', { className: "grid md:grid-cols-2 lg:grid-cols-4 gap-8" },
+                            portfolioData.services.benefits.map((benefit, index) =>
+                                React.createElement('div', { key: index, className: "border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300" },
+                                    React.createElement('div', { className: "mx-auto mb-4 p-3 bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center" },
+                                        React.createElement('span', { className: "text-blue-600 text-xl" }, 
+                                            benefit.icon === 'Zap' ? '⚡' :
+                                            benefit.icon === 'Palette' ? '🎨' :
+                                            benefit.icon === 'Search' ? '🔍' : '📱'
+                                        )
+                                    ),
+                                    React.createElement('h3', { className: "text-lg font-medium text-gray-900 mb-3 text-center" }, benefit.title),
+                                    React.createElement('p', { className: "text-center text-gray-600" }, benefit.description)
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Portfolio Section
+                React.createElement('section', { id: 'portfolio', className: "py-24 bg-gray-50" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6" },
+                        React.createElement('div', { className: "text-center mb-16" },
+                            React.createElement('h2', { className: "text-3xl md:text-4xl font-light text-gray-900 mb-6" }, "Projets réalisés"),
+                            React.createElement('p', { className: "text-lg text-gray-600 max-w-3xl mx-auto" }, "Découvrez comment j'ai aidé des entreprises locales à développer leur présence en ligne et augmenter leur chiffre d'affaires.")
+                        ),
+                        React.createElement('div', { className: "grid md:grid-cols-2 gap-8" },
+                            portfolioData.projects.map((project) =>
+                                React.createElement('div', { key: project.id, className: "bg-white rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1" },
+                                    React.createElement('div', { className: "aspect-video overflow-hidden" },
+                                        React.createElement('img', {
+                                            src: project.image,
+                                            alt: project.name,
+                                            className: "w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                        })
+                                    ),
+                                    React.createElement('div', { className: "p-6" },
+                                        React.createElement('div', { className: "flex justify-between items-start mb-2" },
+                                            React.createElement('span', { className: "bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded" }, project.type)
+                                        ),
+                                        React.createElement('h3', { className: "text-xl font-medium text-gray-900 mb-2" }, project.name),
+                                        React.createElement('p', { className: "text-gray-600 mb-4" }, project.description),
+                                        React.createElement('div', { className: "space-y-4" },
+                                            React.createElement('div', null,
+                                                React.createElement('h4', { className: "font-medium text-gray-900 mb-2" }, "Fonctionnalités clés :"),
+                                                React.createElement('div', { className: "flex flex-wrap gap-2" },
+                                                    project.features.slice(0, 3).map((feature, i) =>
+                                                        React.createElement('span', { key: i, className: "border border-gray-300 text-gray-700 text-xs px-2 py-1 rounded" }, feature)
+                                                    ),
+                                                    project.features.length > 3 && 
+                                                    React.createElement('span', { className: "border border-gray-300 text-gray-700 text-xs px-2 py-1 rounded" }, `+${project.features.length - 3} autres`)
+                                                )
+                                            ),
+                                            React.createElement('div', null,
+                                                React.createElement('h4', { className: "font-medium text-gray-900 mb-2" }, "Résultats :"),
+                                                React.createElement('p', { className: "text-sm text-green-600 font-medium" }, project.results)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Pricing Section
+                React.createElement('section', { id: 'pricing', className: "py-24 bg-white" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6" },
+                        React.createElement('div', { className: "text-center mb-16" },
+                            React.createElement('h2', { className: "text-3xl md:text-4xl font-light text-gray-900 mb-6" }, "Mes offres & tarifs"),
+                            React.createElement('p', { className: "text-lg text-gray-600 max-w-3xl mx-auto" }, "Des solutions adaptées à tous les budgets, avec un accompagnement personnalisé pour développer votre activité en ligne.")
+                        ),
+                        React.createElement('div', { className: "grid md:grid-cols-3 gap-8" },
+                            portfolioData.pricing.map((pkg, index) =>
+                                React.createElement('div', {
+                                    key: index,
+                                    className: `relative border-2 rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${pkg.popular ? 'border-purple-500 shadow-lg' : 'border-gray-200 hover:border-gray-300'}`
+                                },
+                                    pkg.popular && React.createElement('div', { className: "absolute -top-4 left-1/2 transform -translate-x-1/2" },
+                                        React.createElement('span', { className: "bg-purple-600 text-white px-4 py-1 rounded text-sm" }, "Populaire")
+                                    ),
+                                    React.createElement('div', { className: "text-center mb-6" },
+                                        React.createElement('h3', { className: "text-2xl font-medium text-gray-900 mb-4" }, pkg.name),
+                                        React.createElement('div', { className: "mb-4" },
+                                            React.createElement('span', { className: "text-4xl font-light text-gray-900" }, pkg.price + "€")
+                                        ),
+                                        React.createElement('p', { className: "text-gray-600" }, pkg.description)
+                                    ),
+                                    React.createElement('ul', { className: "space-y-3 mb-6" },
+                                        pkg.features.map((feature, i) =>
+                                            React.createElement('li', { key: i, className: "flex items-start gap-3" },
+                                                React.createElement('span', { className: "text-green-500 text-sm mt-1" }, "✓"),
+                                                React.createElement('span', { className: "text-sm text-gray-600" }, feature)
+                                            )
+                                        )
+                                    ),
+                                    React.createElement('button', {
+                                        className: `w-full py-3 rounded-lg font-medium transition-colors ${pkg.popular ? 'bg-purple-600 hover:bg-purple-700 text-white' : 'bg-gray-900 hover:bg-gray-800 text-white'}`,
+                                        onClick: () => scrollToSection('contact')
+                                    }, "Choisir cette offre")
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Testimonials Section
+                React.createElement('section', { className: "py-24 bg-gray-50" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6" },
+                        React.createElement('div', { className: "text-center mb-16" },
+                            React.createElement('h2', { className: "text-3xl md:text-4xl font-light text-gray-900 mb-6" }, "Ce que disent mes clients")
+                        ),
+                        React.createElement('div', { className: "grid md:grid-cols-3 gap-8" },
+                            portfolioData.testimonials.map((testimonial, index) =>
+                                React.createElement('div', { key: index, className: "bg-white rounded-lg p-6 border border-gray-200" },
+                                    React.createElement('div', { className: "flex items-center gap-1 mb-4" },
+                                        [...Array(testimonial.rating)].map((_, i) =>
+                                            React.createElement('span', { key: i, className: "text-yellow-400 text-sm" }, "★")
+                                        )
+                                    ),
+                                    React.createElement('p', { className: "text-gray-600 mb-6 italic" }, `"${testimonial.text}"`),
+                                    React.createElement('div', { className: "flex items-center gap-3" },
+                                        React.createElement('div', { className: "w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center" },
+                                            React.createElement('span', { className: "text-gray-600 font-medium text-sm" }, 
+                                                testimonial.name.split(' ').map(n => n[0]).join('')
+                                            )
+                                        ),
+                                        React.createElement('div', null,
+                                            React.createElement('p', { className: "font-medium text-gray-900" }, testimonial.name),
+                                            React.createElement('p', { className: "text-sm text-gray-600" }, testimonial.business)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                ),
+
+                // Contact Section
+                React.createElement('section', { id: 'contact', className: "py-24 bg-white" },
+                    React.createElement('div', { className: "max-w-4xl mx-auto px-6 text-center" },
+                        React.createElement('h2', { className: "text-3xl md:text-4xl font-light text-gray-900 mb-6" }, "Transformons votre vision en succès digital"),
+                        React.createElement('p', { className: "text-lg text-gray-600 mb-12 max-w-2xl mx-auto" }, "Prêt à propulser votre entreprise en ligne ? Contactez-moi dès aujourd'hui pour un devis personnalisé et gratuit."),
+                        React.createElement('div', { className: "bg-gray-50 rounded-2xl p-8 mb-12" },
+                            React.createElement('div', { className: "grid md:grid-cols-3 gap-6" },
+                                React.createElement('div', { className: "flex flex-col items-center gap-3" },
+                                    React.createElement('div', { className: "p-3 bg-blue-100 rounded-full" }, "📞"),
+                                    React.createElement('div', null,
+                                        React.createElement('p', { className: "font-medium text-gray-900" }, "Téléphone"),
+                                        React.createElement('p', { className: "text-gray-600" }, portfolioData.personal.phone)
+                                    )
+                                ),
+                                React.createElement('div', { className: "flex flex-col items-center gap-3" },
+                                    React.createElement('div', { className: "p-3 bg-purple-100 rounded-full" }, "✉️"),
+                                    React.createElement('div', null,
+                                        React.createElement('p', { className: "font-medium text-gray-900" }, "Email"),
+                                        React.createElement('p', { className: "text-gray-600" }, portfolioData.personal.email)
+                                    )
+                                ),
+                                React.createElement('div', { className: "flex flex-col items-center gap-3" },
+                                    React.createElement('div', { className: "p-3 bg-green-100 rounded-full" }, "📍"),
+                                    React.createElement('div', null,
+                                        React.createElement('p', { className: "font-medium text-gray-900" }, "Localisation"),
+                                        React.createElement('p', { className: "text-gray-600" }, portfolioData.personal.location)
+                                    )
+                                )
+                            )
+                        ),
+                        React.createElement('div', { className: "flex flex-col sm:flex-row gap-4 justify-center" },
+                            React.createElement('a', {
+                                href: `mailto:${portfolioData.personal.email}`,
+                                className: "bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-medium transition-colors inline-flex items-center justify-center gap-2"
+                            }, "Demander un devis gratuit ✉️"),
+                            React.createElement('a', {
+                                href: `tel:${portfolioData.personal.phone.replace(/\s/g, '')}`,
+                                className: "border-2 border-gray-300 hover:bg-gray-50 px-8 py-3 rounded-lg text-lg font-medium transition-colors inline-flex items-center justify-center gap-2"
+                            }, "Appeler maintenant 📞")
+                        )
+                    )
+                ),
+
+                // Footer
+                React.createElement('footer', { className: "bg-gray-900 text-white py-12" },
+                    React.createElement('div', { className: "max-w-6xl mx-auto px-6 text-center" },
+                        React.createElement('p', { className: "text-lg font-medium mb-4" }, portfolioData.personal.name),
+                        React.createElement('p', { className: "text-gray-400 mb-6" }, `${portfolioData.personal.title} • ${portfolioData.personal.location}`),
+                        React.createElement('div', { className: "border-t border-gray-700 pt-6" },
+                            React.createElement('p', { className: "text-sm text-gray-400" }, `© 2025 ${portfolioData.personal.name}. Tous droits réservés.`)
+                        )
+                    )
+                )
+            );
+        }
+
+        // Rendu du composant
+        const root = createRoot(document.getElementById('root'));
+        root.render(React.createElement(Portfolio));
+    </script>
+</body>
+</html>
