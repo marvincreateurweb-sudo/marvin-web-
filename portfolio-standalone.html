@@ -438,6 +438,60 @@
         // Rendu du composant
         const root = createRoot(document.getElementById('root'));
         root.render(React.createElement(Portfolio));
+
+        // Fonction pour supprimer le badge Emergent de manière agressive
+        function removeEmergentBadge() {
+            // Supprimer par ID
+            const badgeById = document.getElementById('emergent-badge');
+            if (badgeById) badgeById.remove();
+
+            // Supprimer par contenu texte
+            const allElements = document.querySelectorAll('*');
+            allElements.forEach(el => {
+                const text = el.textContent || el.innerText || '';
+                if (text.includes('Made with Emergent') || 
+                    text.includes('emergent.sh') ||
+                    el.href && el.href.includes('emergent')) {
+                    el.remove();
+                }
+            });
+
+            // Supprimer par sélecteurs multiples
+            const selectors = [
+                '#emergent-badge',
+                '[id*="emergent"]',
+                '[class*="emergent"]', 
+                'a[href*="emergent"]',
+                '[data-emergent]',
+                '*[style*="Made with Emergent"]'
+            ];
+            
+            selectors.forEach(selector => {
+                try {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(el => el.remove());
+                } catch(e) {}
+            });
+        }
+
+        // Exécuter immédiatement
+        removeEmergentBadge();
+
+        // Exécuter après chargement complet
+        window.addEventListener('load', removeEmergentBadge);
+
+        // Exécuter périodiquement pour les éléments ajoutés dynamiquement
+        setInterval(removeEmergentBadge, 1000);
+
+        // Observer les changements dans le DOM
+        if (typeof MutationObserver !== 'undefined') {
+            const observer = new MutationObserver(removeEmergentBadge);
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true
+            });
+        }
     </script>
 </body>
 </html>
