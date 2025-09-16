@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvin Lacroix - Créateur de sites web | Embrun</title>
+    <meta name="description" content="Portfolio de Marvin Lacroix - Créateur de sites web modernes avec les outils informatiques avancés - Embrun, France">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2563eb, #9333ea);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #2563eb;
+        }
+        
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 50%, #faf5ff 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            color: #111;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #333;
+            border: 2px solid #e5e5e5;
+        }
+        
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+        
+        /* Section styling */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #111;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .benefit-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            color: #111;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-type {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .project-card h3 {
+            font-size: 1.25rem;
+            color: #111;
+            margin-bottom: 10px;
+        }
+        
+        .project-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-tag {
+            background: #e5e7eb;
+            color: #374151;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .project-result {
+            color: #16a34a;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card.popular {
+            border-color: #9333ea;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #9333ea;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            color: #111;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #111;
+            margin-bottom: 10px;
+        }
+        
+        .price-suffix {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .pricing-description {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .features-list li {
+            padding: 8px 0;
+            color: #666;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #16a34a;
+            font-weight: bold;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 30px;
+        }
+        
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: #e5e7eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .author-info h4 {
+            color: #111;
+            margin-bottom: 4px;
+        }
+        
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .contact-icon.phone { background: #dbeafe; }
+        .contact-icon.email { background: #f3e8ff; }
+        .contact-icon.location { background: #dcfce7; }
+        
+        .contact-item h4 {
+            color: #111;
+            margin-bottom: 5px;
+        }
+        
+        .contact-item p {
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        footer h3 {
+            margin-bottom: 10px;
+        }
+        
+        footer p {
+            color: #9ca3af;
+            margin-bottom: 30px;
+        }
+        
+        .footer-divider {
+            height: 1px;
+            background: #374151;
+            margin: 30px 0;
+        }
+        
+        .copyright {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        /* Background sections */
+        .bg-gray {
+            background: #f9fafb;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid,
+            .projects-grid,
+            .pricing-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">ML</div>
+                    <div class="logo-text">Marvin Lacroix</div>
+                </div>
+                <nav>
+                    <a href="#about">À propos</a>
+                    <a href="#projects">Projets</a>
+                    <a href="#pricing">Tarifs</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <button class="mobile-menu">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Créateur de sites web modernes avec les outils informatiques avancés</h1>
+            <p>Spécialisé dans la création de sites web pour entreprises locales en combinant l'efficacité des outils informatiques modernes avec une personnalisation humaine sur mesure.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">Voir mes projets →</a>
+                <a href="#contact" class="btn btn-secondary">Me contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Ma méthode unique : Outils informatiques + Personnalisation humaine</h2>
+            <p class="section-subtitle">Je combine l'efficacité des outils informatiques modernes avec une approche personnalisée pour créer des sites web qui convertissent vraiment vos visiteurs en clients.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Rapidité exceptionnelle</h3>
+                    <p>Développement accéléré grâce aux outils informatiques modernes, livraison en 5-10 jours</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎨</div>
+                    <h3>Design moderne</h3>
+                    <p>Interfaces élégantes et responsives adaptées à votre secteur</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔍</div>
+                    <h3>SEO local optimisé</h3>
+                    <p>Référencement local pour attirer vos clients de proximité</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3>Mobile-first</h3>
+                    <p>Sites parfaitement adaptés aux smartphones et tablettes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-gray">
+        <div class="container">
+            <h2 class="section-title">Projets réalisés</h2>
+            <p class="section-subtitle">Découvrez comment j'ai aidé des entreprises locales à développer leur présence en ligne et augmenter leur chiffre d'affaires.</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1481487196290-c152efe083f5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHx3ZWJzaXRlJTIwbW9ja3VwfGVufDB8fHx8MTc1NzQ2MDQzNnww&ixlib=rb-4.1.0&q=85" alt="Le Bistro des Alpes" class="project-image">
+                    <div class="project-content">
+                        <span class="project-type">Restaurant bistronomique</span>
+                        <h3>Le Bistro des Alpes</h3>
+                        <p>Site vitrine élégant avec système de réservation en ligne pour ce restaurant gastronomique d'Embrun.</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Galerie photos des plats</span>
+                            <span class="feature-tag">Réservation en ligne</span>
+                            <span class="feature-tag">Menu interactif</span>
+                            <span class="feature-tag">+2 autres</span>
+                        </div>
+                        <p class="project-result">+45% de réservations, +60% de visibilité locale</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1519222970733-f546218fa6d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwyfHx3ZWJzaXRlJTIwbW9ja3VwfGVufDB8fHx8MTc1NzQ2MDQzNnww&ixlib=rb-4.1.0&q=85" alt="Brasserie du Centre" class="project-image">
+                    <div class="project-content">
+                        <span class="project-type">Bar & Brasserie</span>
+                        <h3>Brasserie du Centre</h3>
+                        <p>Plateforme dynamique pour promouvoir les événements, le plat du jour et l'ambiance conviviale de cette brasserie emblématique.</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Plat du jour automatisé</span>
+                            <span class="feature-tag">Calendrier événements</span>
+                            <span class="feature-tag">Carte des boissons</span>
+                            <span class="feature-tag">+2 autres</span>
+                        </div>
+                        <p class="project-result">+30% de participation aux événements</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1659354217586-c5931b31e4c6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwxfHhjYXRlcmluZyUyMHdlYnNpdGV8ZW58MHx8fHwxNzU3NDYwNDQxfDA&ixlib=rb-4.1.0&q=85" alt="Saveurs & Événements" class="project-image">
+                    <div class="project-content">
+                        <span class="project-type">Traiteur événementiel</span>
+                        <h3>Saveurs & Événements</h3>
+                        <p>Solution complète avec catalogue interactif et système de devis automatisé.</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Catalogue produits</span>
+                            <span class="feature-tag">Devis en ligne</span>
+                            <span class="feature-tag">Galerie événements</span>
+                            <span class="feature-tag">+2 autres</span>
+                        </div>
+                        <p class="project-result">+50% de demandes de devis qualifiées</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1660796334938-cf0b03be7e6d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxjcmFmdHNtYW4lMjBidXNpbmVzc3xlbnwwfHx8fDE3NTc0NjA0NDd8MA&ixlib=rb-4.1.0&q=85" alt="Artisan Bois Alpin" class="project-image">
+                    <div class="project-content">
+                        <span class="project-type">Menuiserie artisanale</span>
+                        <h3>Artisan Bois Alpin</h3>
+                        <p>Showcase professionnel mettant en valeur le savoir-faire artisanal avec galerie avant/après.</p>
+                        <div class="project-features">
+                            <span class="feature-tag">Portfolio avant/après</span>
+                            <span class="feature-tag">Devis express</span>
+                            <span class="feature-tag">Savoir-faire détaillé</span>
+                            <span class="feature-tag">+2 autres</span>
+                        </div>
+                        <p class="project-result">+70% de demandes de devis, +35% de chiffre d'affaires</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title">Mes offres & tarifs</h2>
+            <p class="section-subtitle">Des solutions adaptées à tous les budgets, avec un accompagnement personnalisé pour développer votre activité en ligne.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">890<span class="price-suffix">€</span></div>
+                    <p class="pricing-description">Parfait pour démarrer votre présence en ligne</p>
+                    <ul class="features-list">
+                        <li>Site vitrine 5 pages</li>
+                        <li>Design responsive</li>
+                        <li>Optimisation SEO de base</li>
+                        <li>Formulaire de contact</li>
+                        <li>1 mois de support</li>
+                        <li>Hébergement 1 an inclus</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Choisir cette offre</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Populaire</div>
+                    <h3>Business</h3>
+                    <div class="price">2490<span class="price-suffix">€</span></div>
+                    <p class="pricing-description">Solution complète pour développer votre activité</p>
+                    <ul class="features-list">
+                        <li>Site jusqu'à 15 pages</li>
+                        <li>Système de réservation/devis</li>
+                        <li>Galerie photos avancée</li>
+                        <li>SEO local optimisé</li>
+                        <li>Analytics & suivi</li>
+                        <li>3 mois de support</li>
+                        <li>Formation incluse</li>
+                        <li>Hébergement 1 an inclus</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Choisir cette offre</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">4990<span class="price-suffix">€</span></div>
+                    <p class="pricing-description">Plateforme sur mesure avec fonctionnalités avancées</p>
+                    <ul class="features-list">
+                        <li>Site illimité + blog</li>
+                        <li>E-commerce intégré</li>
+                        <li>Système de gestion client</li>
+                        <li>Multi-langues</li>
+                        <li>Intégrations API</li>
+                        <li>SEO avancé + suivi</li>
+                        <li>6 mois de support</li>
+                        <li>Formation approfondie</li>
+                        <li>Hébergement 2 ans inclus</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">Choisir cette offre</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="bg-gray">
+        <div class="container">
+            <h2 class="section-title">Ce que disent mes clients</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Marvin a transformé notre visibilité en ligne ! Le site est magnifique et nos réservations ont augmenté de 50% en 2 mois grâce à ses outils informatiques performants."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sophie Martin</h4>
+                            <p>Restaurant Le Petit Gourmand</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Un travail professionnel et rapide. Le système de devis en ligne nous fait gagner un temps précieux !"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PD</div>
+                        <div class="author-info">
+                            <h4>Pierre Dubois</h4>
+                            <p>Artisan Bois & Fer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Exactement ce dont nous avions besoin. Site élégant, facile à utiliser et qui nous apporte de nouveaux clients régulièrement."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Marie Rousseau</h4>
+                            <p>Traiteur Alpes Saveurs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Transformons votre vision en succès digital</h2>
+            <p class="section-subtitle">Prêt à propulser votre entreprise en ligne ? Contactez-moi dès aujourd'hui pour un devis personnalisé et gratuit.</p>
+            
+            <div class="contact-info">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon phone">📞</div>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>07 70 06 10 75</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon email">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>marvin.createurweb@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon location">📍</div>
+                        <div>
+                            <h4>Localisation</h4>
+                            <p>Embrun, France</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="mailto:marvin.createurweb@gmail.com" class="btn btn-primary">Demander un devis gratuit ✉️</a>
+                <a href="tel:0770061075" class="btn btn-secondary">Appeler maintenant 📞</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Marvin Lacroix</h3>
+            <p>Développeur Web & Expert en Outils Informatiques • Embrun, France</p>
+            <div class="footer-divider"></div>
+            <p class="copyright">© 2025 Marvin Lacroix. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation mobile simple
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Smooth scrolling pour les liens internes
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
