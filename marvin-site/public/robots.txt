@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://marvin.createurweb.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/
+
+# Allow important pages
+Allow: /
+Allow: /offres
+Allow: /projets
+Allow: /processus
+Allow: /temoignages
+Allow: /blog
+Allow: /contact
