@@ -36,8 +36,24 @@ Application déployée sur Render avec :
 ## 💼 Services proposés
 
 1. **Starter** (890€) - Site vitrine 5 pages
-2. **Business** (2490€) - Solution complète 
+2. **Business** (2490€) - Solution complète
 3. **Premium** (4990€) - Plateforme sur mesure
+
+## 📂 Portfolio documentaire
+
+Un dossier `docs/portfolio/` centralise désormais les sources du portfolio print-ready :
+
+- `portfolio.md` — version structurée en Markdown avec les études de cas, l’offre tarifaire et les instructions de mise à jour.
+- `mockups/` — maquettes SVG réalistes pour chaque projet fictif (palettes et typographies incluses).
+- `portfolio.pdf` — export final prêt à l’emploi généré à partir des éléments ci-dessus.
+
+Pour régénérer le PDF après une mise à jour du contenu :
+
+```bash
+python docs/portfolio/generate_portfolio_pdf.py
+```
+
+Le script reconstruit le PDF A4 minimaliste en intégrant automatiquement les visuels et les sections éditoriales.
 
 ---
 

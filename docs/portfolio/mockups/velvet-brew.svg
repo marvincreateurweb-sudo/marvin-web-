@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: 64px 'Playfair Display', 'Times New Roman', serif; fill: #3C1F0E; letter-spacing: 6px; }
+      .subtitle { font: 24px 'Playfair Display', 'Times New Roman', serif; fill: #D97706; }
+      .body { font: 20px 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #4B5563; }
+      .badge { font: 18px 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #F9FAFB; letter-spacing: 3px; }
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="#F5E9DD" rx="48" />
+  <rect x="160" y="160" width="1080" height="580" rx="44" fill="#FFFFFF" />
+  <g transform="translate(220, 220)">
+    <text x="0" y="60" class="subtitle">ARTISAN ROASTERS</text>
+    <text x="0" y="140" class="title">VELVET BREW</text>
+    <text x="0" y="200" class="body">Une expérience café premium, de la torréfaction jusqu'au rituel quotidien.</text>
+  </g>
+  <g transform="translate(220, 340)">
+    <rect width="380" height="320" rx="40" fill="#3C1F0E" />
+    <circle cx="190" cy="120" r="80" fill="#F97316" opacity="0.2" />
+    <text x="120" y="160" class="badge" fill="#F9FAFB">SIGNATURE</text>
+    <text x="120" y="210" class="badge" fill="#FCD34D">GOLD BLEND</text>
+    <rect x="90" y="240" width="200" height="10" rx="5" fill="#FCD34D" />
+  </g>
+  <g transform="translate(640, 340)">
+    <rect width="520" height="140" rx="28" fill="#FCD34D" />
+    <text x="40" y="90" class="body" fill="#3C1F0E">• Abonnement espresso • Masterclass barista • Kits latte art</text>
+    <rect y="200" width="520" height="160" rx="28" fill="#FEF3C7" />
+    <text x="40" y="260" class="body">Palette: #3C1F0E #D97706 #FCD34D #F5E9DD</text>
+    <text x="40" y="300" class="body">Typographies: Playfair Display, Helvetica Neue</text>
+  </g>
+  <g transform="translate(220, 700)">
+    <rect width="240" height="60" rx="28" fill="#3C1F0E" />
+    <text x="60" y="738" class="badge">COMMANDER</text>
+  </g>
+</svg>
