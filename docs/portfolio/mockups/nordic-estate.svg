@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: 52px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #0B1120; letter-spacing: 8px; }
+      .subtitle { font: 20px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #64748B; }
+      .body { font: 18px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #1E293B; }
+      .badge { font: 18px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #FFFFFF; letter-spacing: 3px; }
+      .label { font: 16px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #0B1120; }
+    </style>
+  </defs>
+  <rect width="1400" height="900" fill="#E2E8F0" rx="48" />
+  <rect x="120" y="140" width="1160" height="620" rx="40" fill="#FFFFFF" />
+  <rect x="120" y="140" width="380" height="620" rx="40" fill="#0EA5E9" opacity="0.08" />
+  <g transform="translate(160, 200)">
+    <rect width="300" height="120" rx="32" fill="#0EA5E9" />
+    <text x="80" y="270" class="title">NORDIC</text>
+    <text x="80" y="330" class="title">ESTATE</text>
+    <text x="0" y="30" class="badge">NE</text>
+  </g>
+  <g transform="translate(520, 200)">
+    <rect width="600" height="320" rx="32" fill="#0F172A" />
+    <rect x="40" y="60" width="240" height="200" rx="18" fill="#1E293B" />
+    <rect x="320" y="60" width="240" height="200" rx="18" fill="#1E293B" opacity="0.6" />
+    <rect x="40" y="60" width="240" height="80" rx="18" fill="#94A3B8" opacity="0.35" />
+    <rect x="320" y="120" width="240" height="80" rx="18" fill="#38BDF8" opacity="0.5" />
+    <text x="360" y="260" class="badge" fill="#E2E8F0">SCANDIC LIVING</text>
+  </g>
+  <g transform="translate(520, 560)">
+    <text x="0" y="0" class="subtitle">Plateforme premium pour investir dans des architectures nordiques durables.</text>
+    <text x="0" y="60" class="body">• Matching investisseurs & architectes</text>
+    <text x="0" y="100" class="body">• Calculateur énergétique intégré</text>
+    <text x="0" y="140" class="body">• Visites immersives en WebXR</text>
+  </g>
+  <g transform="translate(160, 560)">
+    <rect width="300" height="200" rx="28" fill="#1E293B" />
+    <text x="40" y="100" class="badge">Palette</text>
+    <text x="40" y="140" class="body" fill="#E2E8F0">#0F172A #1E293B #0EA5E9 #E2E8F0</text>
+  </g>
+</svg>
